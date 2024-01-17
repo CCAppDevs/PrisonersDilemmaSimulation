@@ -20,22 +20,24 @@ namespace PrisonersDilemmaSimulation
             // if one party snitches = 5 for the silent, 0 for the snitch
             // if both snitch        = 3 for each
 
+        private List<IStrategy> Players = new List<IStrategy>();
+        private List<Match> Matches = new List<Match>();
+
         public Simulation()
         {
-        
+            // Add Strategies to simulate
+            Players.Add(new Good());
+            Players.Add(new Evil());
+
+            // TODO: cross join players to itself to create pairings
+            Matches.Add(new Match(Players[0], Players[1]));
         }
 
-        public void RunSimulation(IStrategy player1, IStrategy player2, int numberOfRounds)
+        public void RunSimulation()
         {
-            //int player1Score = 0;
-            //int player2Score = 0;
-            List<Round> rounds = new List<Round>();
-
-            for (int i = 0; i < numberOfRounds; i++)
+            foreach (Match match in Matches)
             {
-                // get choices for each player
-                // record the round in the round array
-                rounds.Add(new Round(i, player1, player2));
+                match.Simulate();
             }
 
         }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrisonersDilemmaSimulation.Strategies
+namespace PrisonersDilemmaSimulation
 {
-    internal class BaseStrategy
+    public enum Result
     {
+        Cooperate,
+        Defect
     }
 }
