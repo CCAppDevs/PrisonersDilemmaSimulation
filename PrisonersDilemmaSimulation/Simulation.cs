@@ -28,9 +28,15 @@ namespace PrisonersDilemmaSimulation
             // Add Strategies to simulate
             Players.Add(new Good());
             Players.Add(new Evil());
+            Players.Add(new AlternateGoodBad());
 
-            // TODO: cross join players to itself to create pairings
-            Matches.Add(new Match(Players[0], Players[1]));
+
+            var matches = from p1 in Players
+                          from p2 in Players
+                          select new Match { Player1 = p1, Player2 = p2 };
+
+            Matches.AddRange(matches);
+
         }
 
         public void RunSimulation()
