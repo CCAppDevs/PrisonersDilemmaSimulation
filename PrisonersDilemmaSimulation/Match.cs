@@ -15,12 +15,12 @@ namespace PrisonersDilemmaSimulation
         public IStrategy Player2 { get; set; }
 
         public Hashtable Results { get; set; }
-        public Hashtable Points { get; set; }
+        public Dictionary<string, int> Points { get; set; }
 
         public Match()
         {
             Results = new Hashtable();
-            Points = new Hashtable();
+            Points = new Dictionary<string, int>();
         }
 
         public Match(IStrategy p1, IStrategy p2)
@@ -28,15 +28,14 @@ namespace PrisonersDilemmaSimulation
             Player1 = p1;
             Player2 = p2;
             Results = new Hashtable();
-            Points = new Hashtable();
+            Points = new Dictionary<string, int>();
+
+            Points.Add("Player1", 0);
+            Points.Add("Player2", 0);
         }
 
         public void Simulate()
         {
-            // TODO simulate two players competing
-            Console.WriteLine("---------------- Begin Match ----------------");
-            Console.WriteLine("{0} vs {1}", Player1.GetName(), Player2.GetName());
-
             int p1Score = 0;
             int p2Score = 0;
 
@@ -73,8 +72,8 @@ namespace PrisonersDilemmaSimulation
                 }
             }
 
-            Console.WriteLine("{0} - {1} - {2}", Player1.GetName(), p1Result.ToString(), p1Score);
-            Console.WriteLine("{0} - {1} - {2}", Player2.GetName(), p2Result.ToString(), p2Score);
+            Points["Player1"] += p1Score;
+            Points["Player2"] += p2Score;
         }
     }
 }

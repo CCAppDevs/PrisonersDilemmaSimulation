@@ -22,6 +22,7 @@ namespace PrisonersDilemmaSimulation
 
         private List<IStrategy> Players = new List<IStrategy>();
         private List<Match> Matches = new List<Match>();
+        private int numMatchesInRound = 200;
 
         public Simulation()
         {
@@ -33,7 +34,7 @@ namespace PrisonersDilemmaSimulation
 
             var matches = from p1 in Players
                           from p2 in Players
-                          select new Match { Player1 = p1, Player2 = p2 };
+                          select new Match(p1, p2);
 
             Matches.AddRange(matches);
 
@@ -43,7 +44,19 @@ namespace PrisonersDilemmaSimulation
         {
             foreach (Match match in Matches)
             {
-                match.Simulate();
+                // this is a round
+                Console.WriteLine("=================== Begining Match ==================");
+                Console.WriteLine("{0} vs {1}", match.Player1.GetName(), match.Player2.GetName());
+
+                for (int i = 0; i < numMatchesInRound; i++)
+                {
+                    // this is a single match
+                    match.Simulate();
+                }
+
+                Console.WriteLine("Player1: {0} - Score: {1}", match.Player1.GetName(), match.Points["Player1"]);
+                Console.WriteLine("Player2: {0} - Score: {1}", match.Player2.GetName(), match.Points["Player2"]);
+                // store the score
             }
 
         }
