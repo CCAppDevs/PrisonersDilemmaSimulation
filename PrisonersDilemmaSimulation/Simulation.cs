@@ -22,7 +22,7 @@ namespace PrisonersDilemmaSimulation
 
         private List<IStrategy> Players = new List<IStrategy>();
         private List<Match> Matches = new List<Match>();
-        private int numMatchesInRound = 200;
+        private int numMatchesInRound = 100;
 
         public Simulation()
         {
@@ -54,9 +54,35 @@ namespace PrisonersDilemmaSimulation
                     match.Simulate();
                 }
 
-                Console.WriteLine("Player1: {0} - Score: {1}", match.Player1.GetName(), match.Points["Player1"]);
-                Console.WriteLine("Player2: {0} - Score: {1}", match.Player2.GetName(), match.Points["Player2"]);
-                // store the score
+                Console.Write("Player1: {0} - Score: {1} - Plays: ", match.Player1.GetName(), match.Points["Player1"]);
+
+                foreach (Toss toss in match.Results.Where(t => t.Name == "Player1")) {
+                    if (toss.TossResult.ToString() == "Cooperate")
+                    {
+                        Console.Write('0');
+                    } else
+                    {
+                        Console.Write('#');
+                    }
+                }
+
+                Console.WriteLine();
+                Console.Write("Player2: {0} - Score: {1} - Plays: ", match.Player2.GetName(), match.Points["Player2"]);
+                foreach (Toss toss in match.Results.Where(t => t.Name == "Player2"))
+                {
+                    if (toss.TossResult.ToString() == "Cooperate")
+                    {
+                        Console.Write('0');
+                    }
+                    else
+                    {
+                        Console.Write('#');
+                    }
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+
             }
 
         }
