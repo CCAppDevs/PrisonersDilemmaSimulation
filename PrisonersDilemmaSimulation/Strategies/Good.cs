@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class Good : IStrategy
+    public class Good : AbstractStrategy
     {
         public Good() { }
 
-        public string GetName()
+        public override string GetName()
         {
             return "Good";
         }
 
-        public void Notify(Match match)
+        public override void Notify(Match match)
         {
         }
 
-        public Result Play(IStrategy opponent)
+        public override Result Play(IStrategy opponent)
         {
             return Result.Cooperate;
         }

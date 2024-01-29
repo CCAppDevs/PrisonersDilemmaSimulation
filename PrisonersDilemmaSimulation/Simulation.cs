@@ -31,9 +31,14 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new Evil());
             Players.Add(new AlternateGoodBad());
 
+            List<IStrategy> Players2 = new List<IStrategy>();
+            Players2.Add(new Good());
+            Players2.Add(new Evil());
+            Players2.Add(new AlternateGoodBad());
+
 
             var matches = from p1 in Players
-                          from p2 in Players
+                          from p2 in Players2
                           select new Match(p1, p2);
 
             Matches.AddRange(matches);
@@ -46,7 +51,7 @@ namespace PrisonersDilemmaSimulation
             {
                 // this is a round
                 Console.WriteLine("=================== Begining Match ==================");
-                Console.WriteLine("{0} vs {1}", match.Player1.GetName(), match.Player2.GetName());
+                Console.WriteLine("{0}-{1} vs {2}-{3}", match.Player1.GetGuid(), match.Player1.GetName(), match.Player2.GetGuid(), match.Player2.GetName());
 
                 for (int i = 0; i < numMatchesInRound; i++)
                 {
@@ -54,7 +59,7 @@ namespace PrisonersDilemmaSimulation
                     match.Simulate();
                 }
 
-                Console.Write("Player1: {0} - Score: {1} - Plays: ", match.Player1.GetName(), match.Points["Player1"]);
+                Console.Write("Player1: {0} - Score: {1} - Plays: ", match.Player1.GetGuid(), match.Points["Player1"]);
 
                 foreach (Toss toss in match.Results.Where(t => t.Name == "Player1")) {
                     if (toss.TossResult.ToString() == "Cooperate")
@@ -67,7 +72,7 @@ namespace PrisonersDilemmaSimulation
                 }
 
                 Console.WriteLine();
-                Console.Write("Player2: {0} - Score: {1} - Plays: ", match.Player2.GetName(), match.Points["Player2"]);
+                Console.Write("Player2: {0} - Score: {1} - Plays: ", match.Player2.GetGuid(), match.Points["Player2"]);
                 foreach (Toss toss in match.Results.Where(t => t.Name == "Player2"))
                 {
                     if (toss.TossResult.ToString() == "Cooperate")

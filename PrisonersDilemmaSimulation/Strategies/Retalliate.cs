@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class Retalliate : IStrategy
+    public class Retalliate : AbstractStrategy
     {
         // Always defect if opponent has defected at least once.
 
         public bool hasOpponentDefected = false;
 
-        public string GetName()
+        public override string GetName()
         {
             return "Retaliate";
         }
 
-        public void Notify(Match match)
+        public override void Notify(Match match)
         {
-            match.Results
+            // TODO: build in the decision making using guid to find match.Results.Where()
         }
 
-        public Result Play(IStrategy opponent)
+        public override Result Play(IStrategy opponent)
         {
             if (hasOpponentDefected)
             {

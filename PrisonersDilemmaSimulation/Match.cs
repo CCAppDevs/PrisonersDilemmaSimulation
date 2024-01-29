@@ -44,9 +44,7 @@ namespace PrisonersDilemmaSimulation
             int p2Score = 0;
 
             Result p1Result = Player1.Play(Player2);
-            Results.Add(new Toss("Player1", p1Result, TossNumber));
             Result p2Result = Player2.Play(Player1);
-            Results.Add(new Toss("Player2", p2Result, TossNumber));
 
             // tally scores
             if (p1Result == Result.Cooperate)
@@ -80,6 +78,9 @@ namespace PrisonersDilemmaSimulation
 
             Points["Player1"] += p1Score;
             Points["Player2"] += p2Score;
+
+            Results.Add(new Toss("Player1", Player1.GetGuid(), p1Result, TossNumber, Player2.GetName(), Points["Player1"], p1Score));
+            Results.Add(new Toss("Player2", Player2.GetGuid(), p2Result, TossNumber, Player1.GetName(), Points["Player2"], p2Score));
 
             TossNumber++;
         }

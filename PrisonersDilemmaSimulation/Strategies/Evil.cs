@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class Evil : IStrategy
+    public class Evil : AbstractStrategy
     {
         public Evil()
         {
              
         }
 
-        public string GetName()
+        public override string GetName()
         {
             return "Evil";
         }
 
-        public void Notify(Match match)
+        public override void Notify(Match match)
         {
             throw new NotImplementedException();
         }
 
-        public Result Play(IStrategy opponent)
+        public override Result Play(IStrategy opponent)
         {
             return Result.Defect;
         }

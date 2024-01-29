@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class AlternateGoodBad : IStrategy
+    public class AlternateGoodBad : AbstractStrategy
     {
         public bool isCooperating { get; set; }
 
@@ -15,17 +15,17 @@ namespace PrisonersDilemmaSimulation.Strategies
             isCooperating = false;
         }
 
-        public string GetName()
+        public override string GetName()
         {
             return "AlternateGoodBad";
         }
 
-        public void Notify(Match match)
+        public override void Notify(Match match)
         {
             throw new NotImplementedException();
         }
 
-        public Result Play(IStrategy opponent)
+        public override Result Play(IStrategy opponent)
         {
             isCooperating = !isCooperating;
 
