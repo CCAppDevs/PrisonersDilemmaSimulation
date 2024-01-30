@@ -6,37 +6,37 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class Retalliate : AbstractStrategy
+    public class RandomStrategy : AbstractStrategy
     {
-        // Always defect if opponent has defected at least once.
-
-        public bool hasOpponentDefected = false;
+        Random rnd = new Random();
 
         public override string GetName()
         {
-            return "Retaliate";
+            return "Random";
         }
 
         public override void Notify(Match match)
         {
-            hasOpponentDefected = match.Results.Any(r => r.Guid != Guid && r.TossResult == Result.Defect);
+            // does not care
         }
 
         public override Result Play(IStrategy opponent)
         {
-            if (hasOpponentDefected)
-            {
-                return Result.Defect;
-            } 
-            else
+            // choose a random result to return
+            int choice = rnd.Next(0, 100);
+
+            if (choice <= 50)
             {
                 return Result.Cooperate;
+            } else
+            {
+                return Result.Defect;
             }
         }
 
         public override void ResetStrategy()
         {
-            hasOpponentDefected = false;
+            // does not care
         }
     }
 }

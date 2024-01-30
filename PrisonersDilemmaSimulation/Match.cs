@@ -82,6 +82,9 @@ namespace PrisonersDilemmaSimulation
             Results.Add(new Toss("Player1", Player1.GetGuid(), p1Result, TossNumber, Player2.GetName(), Points["Player1"], p1Score));
             Results.Add(new Toss("Player2", Player2.GetGuid(), p2Result, TossNumber, Player1.GetName(), Points["Player2"], p2Score));
 
+            Player1.Notify(this);
+            Player2.Notify(this);
+
             TossNumber++;
         }
     }

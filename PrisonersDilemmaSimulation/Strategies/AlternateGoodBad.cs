@@ -22,7 +22,6 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            throw new NotImplementedException();
         }
 
         public override Result Play(IStrategy opponent)
@@ -37,6 +36,11 @@ namespace PrisonersDilemmaSimulation.Strategies
             {
                 return Result.Defect;
             }
+        }
+
+        public override void ResetStrategy()
+        {
+            isCooperating = false;
         }
     }
 }

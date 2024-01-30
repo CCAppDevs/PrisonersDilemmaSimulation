@@ -23,5 +23,7 @@ namespace PrisonersDilemmaSimulation.Strategies
         public abstract string GetName();
         public abstract void Notify(Match match);
         public abstract Result Play(IStrategy opponent);
+
+        public abstract void ResetStrategy();
     }
 }

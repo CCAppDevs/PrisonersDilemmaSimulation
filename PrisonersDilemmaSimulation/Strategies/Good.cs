@@ -23,5 +23,9 @@ namespace PrisonersDilemmaSimulation.Strategies
         {
             return Result.Cooperate;
         }
+
+        public override void ResetStrategy()
+        {
+        }
     }
 }

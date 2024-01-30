@@ -30,11 +30,15 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new Good());
             Players.Add(new Evil());
             Players.Add(new AlternateGoodBad());
+            Players.Add(new Retalliate());
+            Players.Add(new RandomStrategy());
 
             List<IStrategy> Players2 = new List<IStrategy>();
             Players2.Add(new Good());
             Players2.Add(new Evil());
             Players2.Add(new AlternateGoodBad());
+            Players2.Add(new Retalliate());
+            Players2.Add(new RandomStrategy());
 
 
             var matches = from p1 in Players
@@ -88,6 +92,8 @@ namespace PrisonersDilemmaSimulation
                 Console.WriteLine();
                 Console.WriteLine();
 
+                match.Player1.ResetStrategy();
+                match.Player2.ResetStrategy();
             }
 
         }

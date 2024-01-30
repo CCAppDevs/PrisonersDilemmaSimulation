@@ -12,5 +12,6 @@ namespace PrisonersDilemmaSimulation.Strategies
         Guid GetGuid();
         Result Play(IStrategy opponent);
         void Notify(Match match);
+        void ResetStrategy();
     }
 }
