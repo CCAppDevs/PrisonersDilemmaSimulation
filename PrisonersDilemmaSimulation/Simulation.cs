@@ -32,6 +32,11 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new AlternateGoodBad());
             Players.Add(new Retalliate());
             Players.Add(new RandomStrategy());
+            Players.Add(new HitchhikerStrategy());  // AP
+            Players.Add(new DaysOfCreation());  //AP
+            Players.Add(new PartyAnimal());   // AP
+            Players.Add(new OurJewishFriend()); // AP
+            Players.Add(new DailyGrind()); // AP
 
             List<IStrategy> Players2 = new List<IStrategy>();
             Players2.Add(new Good());
@@ -39,6 +44,11 @@ namespace PrisonersDilemmaSimulation
             Players2.Add(new AlternateGoodBad());
             Players2.Add(new Retalliate());
             Players2.Add(new RandomStrategy());
+            Players2.Add(new HitchhikerStrategy());  // AP
+            Players2.Add(new DaysOfCreation());  //AP
+            Players2.Add(new PartyAnimal());   // AP
+            Players2.Add(new OurJewishFriend()); // AP
+            Players2.Add(new DailyGrind()); // AP
 
 
             var matches = from p1 in Players
