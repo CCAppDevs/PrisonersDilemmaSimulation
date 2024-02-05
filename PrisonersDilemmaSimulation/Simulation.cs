@@ -37,6 +37,7 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new PartyAnimal());   // AP
             Players.Add(new OurJewishFriend()); // AP
             Players.Add(new DailyGrind()); // AP
+            Players.Add(new TitForTat()); // TE
 
             List<IStrategy> Players2 = new List<IStrategy>();
             Players2.Add(new Good());
@@ -49,6 +50,7 @@ namespace PrisonersDilemmaSimulation
             Players2.Add(new PartyAnimal());   // AP
             Players2.Add(new OurJewishFriend()); // AP
             Players2.Add(new DailyGrind()); // AP
+            Players2.Add(new TitForTat()); // TE
 
 
             var matches = from p1 in Players
