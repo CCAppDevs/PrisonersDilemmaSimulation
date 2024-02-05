@@ -1,23 +1,27 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class TitForTat : AbstractStrategy // Trevor
+    public class SuspiciousTitForTat : AbstractStrategy // Trevor
     {
-        // Defect if the opponent defected in the previous round; with 10% forgiveness.
+        // Defect the first round and thereafter if and only if the opponent defected in the previous round; with 10% forgiveness.
 
         public bool opponentDefected = false;
+        public bool firstRound { get; set; }
         Random rnd = new Random();
+        
+        public SuspiciousTitForTat() 
+        {
+            firstRound = true;
+        }
 
         public override string GetName()
         {
-            return "TitForTat";
+            return "SuspiciousTitForTat";
         }
 
         public override void Notify(Match match)
@@ -32,12 +36,16 @@ namespace PrisonersDilemmaSimulation.Strategies
         {
             int choice = rnd.Next(1, 100);
 
-            if (opponentDefected && choice > 10)
+            if(firstRound)
+            {
+                firstRound = false;
+                return Result.Defect;
+            }
+            else if (opponentDefected && choice > 10)
             {
                 opponentDefected = false;
                 return Result.Defect;
             }
-
             else
             {
                 return Result.Cooperate;
@@ -46,6 +54,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void ResetStrategy()
         {
+            firstRound = true;
             opponentDefected = false;
         }
     }
