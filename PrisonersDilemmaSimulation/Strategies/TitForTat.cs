@@ -13,12 +13,9 @@ namespace PrisonersDilemmaSimulation.Strategies
     {
         // Defect if the opponent defected in the previous round; with 10% forgiveness.
 
-        public int opponentDefected = 0;
-
-        public bool lastDefected = false;   // bool for testing
+        public bool opponentDefected = false;
 
         Random rnd = new Random();
-        int listPosition = 0;
 
         public override string GetName()
         {
@@ -27,18 +24,17 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            // Grab the last result from the match
             if (match.Results.Last().TossResult == Result.Defect)
             {
-                lastDefected = true;
-            };    // most recent item in the results list (most recent last match)
+                opponentDefected = true;
+            }
         }
 
         public override Result Play(IStrategy opponent)
         {
             int choice = rnd.Next(1, 100);
 
-            if (lastDefected && choice > 10)   // I think this should be less than 10 for 10% forgiveness
+            if (opponentDefected && choice > 10)
             {
                 ResetStrategy();
                 return Result.Defect;
@@ -52,7 +48,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void ResetStrategy()
         {
-            lastDefected = false;
+            opponentDefected = false;
         }
     }
 }
