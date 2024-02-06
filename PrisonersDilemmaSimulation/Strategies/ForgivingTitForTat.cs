@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace PrisonersDilemmaSimulation.Strategies
 {
-    public class TitForTat : AbstractStrategy // Trevor
+    public class ForgivingTitForTat : AbstractStrategy // Trevor
     {
-        // Defect if the opponent defected in the previous round
+        // Defect if the opponent defected in the previous round; with 10% forgiveness.
 
         public bool opponentDefected = false;
+        Random rnd = new Random();
 
         public override string GetName()
         {
-            return "TitForTat";
+            return "ForgivingTitForTat";
         }
 
         public override void Notify(Match match)
@@ -29,9 +30,11 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override Result Play(IStrategy opponent)
         {
-            if (opponentDefected)
+            int choice = rnd.Next(1, 100);
+
+            if (opponentDefected/* && choice > 10*/)
             {
-                opponentDefected = false;
+                //opponentDefected = false;
                 return Result.Defect;
             }
 
