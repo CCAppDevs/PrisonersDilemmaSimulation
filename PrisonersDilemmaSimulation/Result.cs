@@ -8,7 +8,7 @@ namespace PrisonersDilemmaSimulation
 {
     public enum Result
     {
-        Cooperate,
-        Defect
+        Cooperate = 0,
+        Defect = 1
     }
 }
