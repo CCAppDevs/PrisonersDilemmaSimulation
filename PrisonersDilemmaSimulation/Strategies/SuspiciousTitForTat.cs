@@ -26,7 +26,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            if (match.Results.Last().TossResult == Result.Defect)
+            if (match.Results.Where(r => r.Guid != Guid).Last().TossResult == Result.Defect)
             {
                 opponentDefected = true;
             }
@@ -48,6 +48,7 @@ namespace PrisonersDilemmaSimulation.Strategies
             }
             else
             {
+                opponentDefected = false;
                 return Result.Cooperate;
             }
         }

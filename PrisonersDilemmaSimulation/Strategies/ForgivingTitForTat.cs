@@ -22,7 +22,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            if (match.Results.Last().TossResult == Result.Defect)
+            if (match.Results.Where(r => r.Guid != Guid).Last().TossResult == Result.Defect)
             {
                 opponentDefected = true;
             }
@@ -32,16 +32,17 @@ namespace PrisonersDilemmaSimulation.Strategies
         {
             int choice = rnd.Next(1, 100);
 
-            if (opponentDefected/* && choice > 10*/)
+            if (opponentDefected && choice > 10)
             {
-                //opponentDefected = false;
+                opponentDefected = false;
                 return Result.Defect;
             }
-
             else
             {
+                opponentDefected = false;
                 return Result.Cooperate;
             }
+
         }
 
         public override void ResetStrategy()

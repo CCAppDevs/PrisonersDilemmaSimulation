@@ -27,33 +27,33 @@ namespace PrisonersDilemmaSimulation
         public Simulation()
         {
             // Add Strategies to simulate
-            //Players.Add(new Good());
-            //Players.Add(new Evil());
+            Players.Add(new Good());
+            Players.Add(new Evil());
             Players.Add(new AlternateGoodBad());
-            //Players.Add(new Retalliate());
-            //Players.Add(new RandomStrategy());
-            //Players.Add(new HitchhikerStrategy());  // AP
-            //Players.Add(new DaysOfCreation());  //AP
-            //Players.Add(new PartyAnimal());   // AP
-            //Players.Add(new OurJewishFriend()); // AP
-            //Players.Add(new DailyGrind()); // AP
-            //Players.Add(new TitForTat()); // TE
+            Players.Add(new Retalliate());
+            Players.Add(new RandomStrategy());
+            Players.Add(new HitchhikerStrategy());  // AP
+            Players.Add(new DaysOfCreation());  //AP
+            Players.Add(new PartyAnimal());   // AP
+            Players.Add(new OurJewishFriend()); // AP
+            Players.Add(new DailyGrind()); // AP
+            Players.Add(new TitForTat()); // TE
             Players.Add(new ForgivingTitForTat()); // TE
-            //Players.Add(new SuspiciousTitForTat()); // TE
+            Players.Add(new SuspiciousTitForTat()); // TE
 
             List<IStrategy> Players2 = new List<IStrategy>();
-            //Players2.Add(new Good());
-            //Players2.Add(new Evil());
+            Players2.Add(new Good());
+            Players2.Add(new Evil());
             Players2.Add(new AlternateGoodBad());
-            //Players2.Add(new Retalliate());
-            //Players2.Add(new RandomStrategy());
-            //Players2.Add(new HitchhikerStrategy());  // AP
-            //Players2.Add(new DaysOfCreation());  //AP
-            //Players2.Add(new PartyAnimal());   // AP
-            //Players2.Add(new OurJewishFriend()); // AP
-            //Players2.Add(new DailyGrind()); // AP
-            //Players2.Add(new TitForTat()); // TE
-            //Players2.Add(new SuspiciousTitForTat()); // TE
+            Players2.Add(new Retalliate());
+            Players2.Add(new RandomStrategy());
+            Players2.Add(new HitchhikerStrategy());  // AP
+            Players2.Add(new DaysOfCreation());  //AP
+            Players2.Add(new PartyAnimal());   // AP
+            Players2.Add(new OurJewishFriend()); // AP
+            Players2.Add(new DailyGrind()); // AP
+            Players2.Add(new TitForTat()); // TE
+            Players2.Add(new SuspiciousTitForTat()); // TE
             Players2.Add(new ForgivingTitForTat());
 
 

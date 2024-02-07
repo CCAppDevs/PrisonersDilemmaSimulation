@@ -10,7 +10,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 {
     public class TitForTat : AbstractStrategy // Trevor
     {
-        // Defect if the opponent defected in the previous round
+        // Defect if the opponent defected in the previous round;
 
         public bool opponentDefected = false;
 
@@ -21,7 +21,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            if (match.Results.Last().TossResult == Result.Defect)
+            if (match.Results.Where(r => r.Guid != Guid).Last().TossResult == Result.Defect)
             {
                 opponentDefected = true;
             }
@@ -34,11 +34,12 @@ namespace PrisonersDilemmaSimulation.Strategies
                 opponentDefected = false;
                 return Result.Defect;
             }
-
             else
             {
+                opponentDefected = false;
                 return Result.Cooperate;
             }
+
         }
 
         public override void ResetStrategy()
