@@ -20,7 +20,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void Notify(Match match)
         {
-            MatchCount = match.Results.Count;
+            MatchCount++;
 
             if (match.Results.Count > 1)
             {
@@ -64,7 +64,7 @@ namespace PrisonersDilemmaSimulation.Strategies
 
         public override void ResetStrategy()
         {
-            //Doesn't Care
+            MatchCount = 0;
         }
     }
 }
