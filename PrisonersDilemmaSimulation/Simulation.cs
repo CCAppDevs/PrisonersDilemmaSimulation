@@ -22,7 +22,7 @@ namespace PrisonersDilemmaSimulation
 
         private List<IStrategy> Players = new List<IStrategy>();
         private List<Match> Matches = new List<Match>();
-        private int numMatchesInRound = 100;
+        private int numMatchesInRound = 1000;
 
         public Simulation()
         {
@@ -40,6 +40,8 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new TitForTat()); // TE
             Players.Add(new ForgivingTitForTat()); // TE
             Players.Add(new SuspiciousTitForTat()); // TE
+            Players.Add(new Deception());
+            Players.Add(new CoinToss());
 
             List<IStrategy> Players2 = new List<IStrategy>();
             Players2.Add(new Good());
@@ -55,7 +57,8 @@ namespace PrisonersDilemmaSimulation
             Players2.Add(new TitForTat()); // TE
             Players2.Add(new SuspiciousTitForTat()); // TE
             Players2.Add(new ForgivingTitForTat());
-
+            Players2.Add(new Deception());
+            Players2.Add(new CoinToss());
 
             var matches = from p1 in Players
                           from p2 in Players2
