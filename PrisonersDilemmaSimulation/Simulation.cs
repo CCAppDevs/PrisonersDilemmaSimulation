@@ -42,6 +42,8 @@ namespace PrisonersDilemmaSimulation
             Players.Add(new SuspiciousTitForTat()); // TE
             Players.Add(new Deception());
             Players.Add(new CoinToss());
+            Players.Add(new FirmButFair()); // DG
+            Players.Add(new Countdown());   // DG
 
             List<IStrategy> Players2 = new List<IStrategy>();
             Players2.Add(new Good());
@@ -59,6 +61,8 @@ namespace PrisonersDilemmaSimulation
             Players2.Add(new ForgivingTitForTat());
             Players2.Add(new Deception());
             Players2.Add(new CoinToss());
+            Players2.Add(new FirmButFair()); // DG
+            Players2.Add(new Countdown());   // DG
 
             var matches = from p1 in Players
                           from p2 in Players2
