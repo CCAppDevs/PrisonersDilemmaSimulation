@@ -1,4 +1,5 @@
-﻿using PrisonersDilemmaSimulation.Strategies;
+﻿using PrisonersDilemmaSimulation.Models;
+using PrisonersDilemmaSimulation.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,16 @@ namespace PrisonersDilemmaSimulation
             Players2.Add(new FirmButFair()); // DG
             Players2.Add(new Countdown());   // DG
 
+            foreach (var player in Players)
+            {
+                SaveStrategy(player);
+            }
+
+            foreach (var player in Players2)
+            {
+                SaveStrategy(player);
+            }
+
             var matches = from p1 in Players
                           from p2 in Players2
                           select new Match(p1, p2);
@@ -88,37 +99,118 @@ namespace PrisonersDilemmaSimulation
 
                 Console.Write("Player1: {0} - Score: {1} - Plays: ", match.Player1.GetGuid(), match.Points["Player1"]);
 
-                foreach (Toss toss in match.Results.Where(t => t.Name == "Player1")) {
-                    if (toss.TossResult.ToString() == "Cooperate")
-                    {
-                        Console.Write('0');
-                    } else
-                    {
-                        Console.Write('#');
-                    }
-                }
+                //foreach (Toss toss in match.Results.Where(t => t.Name == "Player1")) {
+                //    if (toss.TossResult.ToString() == "Cooperate")
+                //    {
+                //        Console.Write('0');
+                //    } else
+                //    {
+                //        Console.Write('#');
+                //    }
+                //}
 
                 Console.WriteLine();
                 Console.Write("Player2: {0} - Score: {1} - Plays: ", match.Player2.GetGuid(), match.Points["Player2"]);
-                foreach (Toss toss in match.Results.Where(t => t.Name == "Player2"))
-                {
-                    if (toss.TossResult.ToString() == "Cooperate")
-                    {
-                        Console.Write('0');
-                    }
-                    else
-                    {
-                        Console.Write('#');
-                    }
-                }
+                //foreach (Toss toss in match.Results.Where(t => t.Name == "Player2"))
+                //{
+                //    if (toss.TossResult.ToString() == "Cooperate")
+                //    {
+                //        Console.Write('0');
+                //    }
+                //    else
+                //    {
+                //        Console.Write('#');
+                //    }
+                //}
 
                 Console.WriteLine();
                 Console.WriteLine();
+
+                try
+                {
+                    RecordMatch(match);
+                } catch (Exception ex) { 
+                    Console.WriteLine(ex.ToString()); 
+                }
 
                 match.Player1.ResetStrategy();
                 match.Player2.ResetStrategy();
             }
 
+        }
+
+        public void SaveStrategy(IStrategy strategy)
+        {
+            using (var ctx = new PDContext())
+            {
+                ctx.Strategies.Add(new Strategy
+                {
+                    StrategyID = 0,
+                    StrategyName = strategy.GetName(),
+                    StrategyDescription = "", // TODO: Either add a field for this to IStrategy or remove this from the model.
+                    Guid = strategy.GetGuid().ToString(),
+                });
+
+                ctx.SaveChanges();
+            }
+        }
+
+        public void RecordMatch(Match match)
+        {
+            
+            // using the context, record the match
+            using (var ctx = new PDContext())
+            {
+                Strategy player1 = ctx.Strategies.Where(s => s.Guid == match.Player1.GetGuid().ToString()).SingleOrDefault();
+                Strategy player2 = ctx.Strategies.Where(s => s.Guid == match.Player2.GetGuid().ToString()).SingleOrDefault();
+
+                if (player1 == null)
+                {
+                    throw new Exception("Player 1 was not found.");
+                }
+
+                if (player2 == null)
+                {
+                    throw new Exception("Player 2 was not found.");
+                }
+
+                MatchRecord theMatch = new MatchRecord
+                {
+                    Player1Id = player1.StrategyID,
+                    Player2Id = player2.StrategyID,
+                    Tosses = new List<TossRecord>()
+                };
+
+                foreach (Toss toss in match.Results)
+                {
+                    theMatch.Tosses.Add(new TossRecord
+                    {
+                        PlayerName = toss.Name,
+                        PlayerGuid = toss.Guid.ToString(),
+                        TossNumber = toss.TossNumber,
+                        TossResult = GetResult(toss.TossResult),
+                        OpponentName = toss.OpponentName,
+                        PointsTotal = toss.PointsTotal,
+                        PointsEarnedThisToss = toss.PointsEarnedThisToss
+                    });
+                }
+
+                ctx.Matches.Add(theMatch);
+
+                ctx.SaveChanges();
+            }
+        }
+
+        private int GetResult(Result tossResult)
+        {
+            if (tossResult == Result.Cooperate)
+            {
+                return 0;
+            } 
+            else
+            {
+                return 1;
+            }
         }
     }
 }
